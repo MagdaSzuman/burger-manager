@@ -12,10 +12,5 @@ public class IngredientController {
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-    @GetMapping("/hello")
-    public ModelAndView hello (){
-        ModelAndView modelAndView = new ModelAndView("Hello MgSzu");
-        return modelAndView;
 
-    }
 }
