@@ -1,9 +1,7 @@
 package com.wandm.burgermanager.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class ProductModel {
@@ -13,16 +11,27 @@ public class ProductModel {
     private Long id;
     private Long id_burger;
     private String name_burger;
-    private Long id_ingredient;
+
+    @ManyToMany (cascade=CascadeType.ALL)
+    @JoinTable(
+            name = "Product_Ingredient",
+            joinColumns = { @JoinColumn(name = "product_id") },
+            inverseJoinColumns = { @JoinColumn(name = "ingredient_id") }
+    )
+    Set<IngredientModel> ingredients = new HashSet<>();
+
     private Long ingredient_quantity;
+
+
+
 
     public ProductModel() {
     }
 
-    public ProductModel(Long id_burger, String name_burger, Long id_ingredient, Long ingredient_quantity) {
+    public ProductModel(Long id_burger, String name_burger, Set<IngredientModel> ingredients, Long ingredient_quantity) {
         this.id_burger = id_burger;
         this.name_burger = name_burger;
-        this.id_ingredient = id_ingredient;
+        this.ingredients = ingredients;
         this.ingredient_quantity = ingredient_quantity;
     }
 
@@ -50,12 +59,12 @@ public class ProductModel {
         this.name_burger = name_burger;
     }
 
-    public Long getId_ingredient() {
-        return id_ingredient;
+    public Set<IngredientModel> getIngredients() {
+        return ingredients;
     }
 
-    public void setId_ingredient(Long id_ingredient) {
-        this.id_ingredient = id_ingredient;
+    public void setIngredients(Set<IngredientModel> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public Long getIngredient_quantity() {
@@ -72,7 +81,7 @@ public class ProductModel {
                 "id=" + id +
                 ", id_burger=" + id_burger +
                 ", name_burger='" + name_burger + '\'' +
-                ", id_ingredient=" + id_ingredient +
+                ", ingredients=" + ingredients +
                 ", ingredient_quantity=" + ingredient_quantity +
                 '}';
     }

@@ -1,10 +1,9 @@
 package com.wandm.burgermanager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class IngredientModel {
@@ -12,17 +11,20 @@ public class IngredientModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_ingredient;
+    @ManyToMany (mappedBy = "ingredients")
+    private Set<ProductModel> products= new HashSet<>();
     private String name_ingredient;
-    private Long id_supplier;
+    @ManyToOne
+    @JoinColumn(name = "id_ingredient")
+    private SupplierModel id_supplier;
     private Long stock_ingredient;
     private Date best_of_ingredient;
 
     public IngredientModel() {
     }
 
-    public IngredientModel(Long id_ingredient, String name_ingredient, Long id_supplier, Long stock_ingredient, Date best_of_ingredient) {
-        this.id_ingredient = id_ingredient;
+    public IngredientModel(Set<ProductModel> products, String name_ingredient, SupplierModel id_supplier, Long stock_ingredient, Date best_of_ingredient) {
+        this.products = products;
         this.name_ingredient = name_ingredient;
         this.id_supplier = id_supplier;
         this.stock_ingredient = stock_ingredient;
@@ -37,13 +39,6 @@ public class IngredientModel {
         this.id = id;
     }
 
-    public Long getId_ingredient() {
-        return id_ingredient;
-    }
-
-    public void setId_ingredient(Long id_ingredient) {
-        this.id_ingredient = id_ingredient;
-    }
 
     public String getName_ingredient() {
         return name_ingredient;
@@ -53,11 +48,19 @@ public class IngredientModel {
         this.name_ingredient = name_ingredient;
     }
 
-    public Long getId_supplier() {
+    public Set<ProductModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductModel> products) {
+        this.products = products;
+    }
+
+    public SupplierModel getId_supplier() {
         return id_supplier;
     }
 
-    public void setId_supplier(Long id_supplier) {
+    public void setId_supplier(SupplierModel id_supplier) {
         this.id_supplier = id_supplier;
     }
 
@@ -81,7 +84,7 @@ public class IngredientModel {
     public String toString() {
         return "IngredientModel{" +
                 "id=" + id +
-                ", id_ingredient=" + id_ingredient +
+                ", products=" + products +
                 ", name_ingredient='" + name_ingredient + '\'' +
                 ", id_supplier=" + id_supplier +
                 ", stock_ingredient=" + stock_ingredient +

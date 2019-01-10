@@ -13,7 +13,7 @@ public class ProductMapper implements RowMapper<ProductModel> {
         productModel.setId(resultSet.getLong("id"));
         productModel.setId_burger(resultSet.getLong("id_burger"));
         productModel.setName_burger(resultSet.getString("name_burger"));
-        productModel.setId_ingredient(resultSet.getLong("id_ingredient"));
+        //productModel.setId_ingredient(resultSet.getLong("id_ingredient"));
         productModel.setIngredient_quantity(resultSet.getLong("ingredient_quantity"));
         return productModel;
     }
