@@ -1,18 +1,19 @@
 package com.wandm.burgermanager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class SupplierModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_supplier;
+    private Integer id_supplier;
     private String name_supplier;
     private String address_supplier;
+    @OneToMany(mappedBy = "id_supplier", cascade = CascadeType.ALL)
+    private List<IngredientModel> id_ingredient = new ArrayList<>();
 
     public SupplierModel() {
     }
@@ -22,11 +23,17 @@ public class SupplierModel {
         this.address_supplier = address_supplier;
     }
 
-    public Long getId_supplier() {
+    public SupplierModel(String name_supplier, String address_supplier, List<IngredientModel> id_ingredient) {
+        this.name_supplier = name_supplier;
+        this.address_supplier = address_supplier;
+        this.id_ingredient = id_ingredient;
+    }
+
+    public Integer getId_supplier() {
         return id_supplier;
     }
 
-    public void setId_supplier(Long id_supplier) {
+    public void setId_supplier(Integer id_supplier) {
         this.id_supplier = id_supplier;
     }
 
@@ -46,12 +53,21 @@ public class SupplierModel {
         this.address_supplier = address_supplier;
     }
 
+    public List<IngredientModel> getId_ingredient() {
+        return id_ingredient;
+    }
+
+    public void setId_ingredient(List<IngredientModel> id_ingredient) {
+        this.id_ingredient = id_ingredient;
+    }
+
     @Override
     public String toString() {
         return "SupplierModel{" +
                 "id_supplier=" + id_supplier +
                 ", name_supplier='" + name_supplier + '\'' +
                 ", address_supplier='" + address_supplier + '\'' +
+                ", id_ingredient=" + id_ingredient +
                 '}';
     }
 }

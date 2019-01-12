@@ -1,5 +1,4 @@
 package com.wandm.burgermanager.serivce;
 
-public interface IngredientService {
-
+public interface SupplierService {
 }
