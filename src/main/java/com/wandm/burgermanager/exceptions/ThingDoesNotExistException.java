@@ -1,4 +1,4 @@
-package com.wandm.burgermanager.controller;
+package com.wandm.burgermanager.exceptions;
 
 public class ThingDoesNotExistException extends Exception {
     public ThingDoesNotExistException() {
