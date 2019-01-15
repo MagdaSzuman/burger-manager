@@ -10,7 +10,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public void addProduct(Integer id_burger, String name_burger, Set<IngredientModel> ingredients, Integer ingredient_quantity) {
+    public void addProduct(Integer id_burger, String nameBurger, Set<IngredientModel> ingredients, Integer ingredient_quantity) {
 
     }
 }

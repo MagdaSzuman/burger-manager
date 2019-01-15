@@ -1,9 +1,6 @@
 package com.wandm.burgermanager.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class ProductModel {
@@ -11,13 +8,14 @@ public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name_burger;
+    @Column (name= "name_burger")
+    private String nameBurger;
 
     public ProductModel() {
     }
 
-    public ProductModel(String name_burger) {
-        this.name_burger = name_burger;
+    public ProductModel(String nameBurger) {
+        this.nameBurger = nameBurger;
     }
 
     public Integer getId() {
@@ -28,19 +26,19 @@ public class ProductModel {
         this.id = id;
     }
 
-    public String getName_burger() {
-        return name_burger;
+    public String getNameBurger() {
+        return nameBurger;
     }
 
-    public void setName_burger(String name_burger) {
-        this.name_burger = name_burger;
+    public void setNameBurger(String nameBurger) {
+        this.nameBurger = nameBurger;
     }
 
     @Override
     public String toString() {
         return "ProductModel{" +
                 "id=" + id +
-                ", name_burger='" + name_burger + '\'' +
+                ", nameBurger='" + nameBurger + '\'' +
                 '}';
     }
 }

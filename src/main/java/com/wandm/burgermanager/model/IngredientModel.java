@@ -1,12 +1,6 @@
 package com.wandm.burgermanager.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class IngredientModel {
@@ -14,7 +8,8 @@ public class IngredientModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name_ingredient;
+    @Column (name= "name_ingredient")
+    private String nameIngredient;
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
     private SupplierModel id_supplier;
@@ -25,8 +20,8 @@ public class IngredientModel {
     public IngredientModel() {
     }
 
-    public IngredientModel(String name_ingredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient) {
-        this.name_ingredient = name_ingredient;
+    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient) {
+        this.nameIngredient = nameIngredient;
         this.id_supplier = id_supplier;
         this.stock_ingredient = stock_ingredient;
         this.best_of_ingredient = best_of_ingredient;
@@ -41,12 +36,12 @@ public class IngredientModel {
         this.id = id;
     }
 
-    public String getName_ingredient() {
-        return name_ingredient;
+    public String getNameIngredient() {
+        return nameIngredient;
     }
 
-    public void setName_ingredient(String name_ingredient) {
-        this.name_ingredient = name_ingredient;
+    public void setNameIngredient(String nameIngredient) {
+        this.nameIngredient = nameIngredient;
     }
 
     public SupplierModel getId_supplier() {
@@ -85,7 +80,7 @@ public class IngredientModel {
     public String toString() {
         return "IngredientModel{" +
                 "id=" + id +
-                ", name_ingredient='" + name_ingredient + '\'' +
+                ", nameIngredient='" + nameIngredient + '\'' +
                 ", id_supplier=" + id_supplier +
                 ", stock_ingredient=" + stock_ingredient +
                 ", best_of_ingredient=" + best_of_ingredient +

@@ -38,8 +38,8 @@ public class IngredientController {
     }
 
     @GetMapping("/findIngredientByName")
-    public IngredientModel findIngredientByName(@RequestParam(value = "name_ingredient") String name_ingredient) {
-        return ingredientRepository.findByName(name_ingredient);
+    public IngredientModel findIngredientByName(@RequestParam(value = "nameIngredient") String nameIngredient) {
+        return ingredientRepository.findByNameIngredient(nameIngredient);
     }
 
     @PostMapping("/addNewIngredient")
@@ -55,10 +55,10 @@ public class IngredientController {
         byId.ifPresent(p->ingredientRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteIngredient/{name_ingredient}")
-    public void deleteIngredientByName(@PathVariable("name_ingredient") String name_ingredient) throws ThingDoesNotExistException {
-        IngredientModel nameToDelete = ingredientRepository.findByName(name_ingredient);
-        if(!name_ingredient.equals(ingredientRepository.findByName(name_ingredient))) throw new ThingDoesNotExistException();
+    @DeleteMapping("/deleteIngredient/{nameIngredient}")
+    public void deleteIngredientByName(@PathVariable("nameIngredient") String nameIngredient) throws ThingDoesNotExistException {
+        IngredientModel nameToDelete = ingredientRepository.findByNameIngredient(nameIngredient);
+        if(!nameIngredient.equals(ingredientRepository.findByNameIngredient(nameIngredient))) throw new ThingDoesNotExistException();
         ingredientRepository.delete(nameToDelete);
     }
 

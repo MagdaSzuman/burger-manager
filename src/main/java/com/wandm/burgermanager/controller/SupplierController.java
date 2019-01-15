@@ -39,8 +39,8 @@ public class SupplierController {
     }
 
     @GetMapping("/findSupplierByName")
-    public SupplierModel findSupplierByName(@RequestParam(value = "name_supplier") String name_supplier) {
-        return supplierRepository.findByName(name_supplier);
+    public SupplierModel findSupplierByName(@RequestParam(value = "nameSupplier") String nameSupplier) {
+        return supplierRepository.findByNameSupplier(nameSupplier);
     }
 
     @PostMapping("/addNewSupplier")
@@ -56,10 +56,10 @@ public class SupplierController {
         byId.ifPresent(p->supplierRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteSupplier/{name_supplier}")
-    public void deleteProductByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
-        SupplierModel nameToDelete = supplierRepository.findByName(name_supplier);
-        if(!name_supplier.equals(supplierRepository.findByName(name_supplier))) throw new ThingDoesNotExistException();
+    @DeleteMapping("/deleteSupplier/{nameSupplier}")
+    public void deleteProductByName(@PathVariable("nameSupplier") String nameSupplier) throws ThingDoesNotExistException {
+        SupplierModel nameToDelete = supplierRepository.findByNameSupplier(nameSupplier);
+        if(!nameSupplier.equals(supplierRepository.findByNameSupplier(nameSupplier))) throw new ThingDoesNotExistException();
         supplierRepository.delete(nameToDelete);
     }
 

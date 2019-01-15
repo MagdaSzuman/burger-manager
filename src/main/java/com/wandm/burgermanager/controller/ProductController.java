@@ -35,8 +35,8 @@ public class ProductController {
     }
 
     @GetMapping("/findProductByName")
-    public ProductModel findProductByName(@RequestParam(value = "name_burger") String name_burger) {
-        return productRepository.findByName(name_burger);
+    public ProductModel findProductByName(@RequestParam(value = "name_burger") String nameBurger) {
+        return productRepository.findByNameBurger(nameBurger);
     }
 
     @PostMapping("/addNewProduct")
@@ -53,9 +53,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/deleteProduct/{name_burger}")
-    public void deleteProductByName(@PathVariable("name_burger") String name_burger) throws ThingDoesNotExistException {
-        ProductModel nameToDelete = productRepository.findByName(name_burger);
-        if(!name_burger.equals(productRepository.findByName(name_burger))) throw new ThingDoesNotExistException();
+    public void deleteProductByName(@PathVariable("name_burger") String nameBurger) throws ThingDoesNotExistException {
+        ProductModel nameToDelete = productRepository.findByNameBurger(nameBurger);
+        if(!nameBurger.equals(productRepository.findByNameBurger(nameBurger))) throw new ThingDoesNotExistException();
         productRepository.delete(nameToDelete);
     }
 

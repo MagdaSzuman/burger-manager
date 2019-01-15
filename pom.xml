@@ -11,7 +11,7 @@
     <groupId>com.WAndM</groupId>
     <artifactId>burger-manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>burger-manager</name>
+    <nameBurger>burger-manager</nameBurger>
     <description>Demo project for Spring Boot</description>
 
     <properties>
