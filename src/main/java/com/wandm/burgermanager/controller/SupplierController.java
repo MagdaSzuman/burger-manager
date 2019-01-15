@@ -35,7 +35,7 @@ public class SupplierController {
 
     @GetMapping("/findSupplierById")
     public Optional<SupplierModel> findSupplierById(@RequestParam(value = "id") Integer id) {
-        return supplierRepository.findById(Long.valueOf(id));
+        return supplierRepository.findById(Integer.valueOf(id));
     }
 
     @GetMapping("/findSupplierByName")
@@ -51,7 +51,7 @@ public class SupplierController {
 
     @DeleteMapping("/deleteSupplier/{id}")
     public void deleteSupplierById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<SupplierModel> byId = supplierRepository.findById(Long.valueOf(id));
+        Optional<SupplierModel> byId = supplierRepository.findById(Integer.valueOf(id));
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->supplierRepository.delete(p));
     }

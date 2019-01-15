@@ -34,7 +34,7 @@ public class IngredientController {
 
     @GetMapping("/findIngredientById")
     public Optional<IngredientModel> findIngredientById(@RequestParam(value = "id") Integer id) {
-        return ingredientRepository.findById(Long.valueOf(id));
+        return ingredientRepository.findById(Integer.valueOf(id));
     }
 
     @GetMapping("/findIngredientByName")
@@ -50,7 +50,7 @@ public class IngredientController {
 
     @DeleteMapping("/deleteIngredient/{id}")
     public void deleteIngredientById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<IngredientModel> byId = ingredientRepository.findById(Long.valueOf(id));
+        Optional<IngredientModel> byId = ingredientRepository.findById(Integer.valueOf(id));
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->ingredientRepository.delete(p));
     }
