@@ -34,12 +34,12 @@ public class SupplierController {
 
     @GetMapping("/findSupplierById")
     public Optional<SupplierModel> findSupplierById(@RequestParam(value = "id") Integer id) {
-        return supplierRepository.findById(Long.valueOf(id));
+        return supplierRepository.findById(id);
     }
 
     @GetMapping("/findSupplierByName")
     public SupplierModel findSupplierByName(@RequestParam(value = "name_supplier") String name_supplier) {
-        return supplierRepository.findByName(name_supplier);
+        return supplierRepository.findByNameSupplier(name_supplier);
     }
 
     @PostMapping("/addNewSupplier")
@@ -48,18 +48,18 @@ public class SupplierController {
         return save.getId_supplier();
     }
 
-    @DeleteMapping("/deleteSupplier/{id}")
+    @DeleteMapping("/deleteSupplierById/{id}")
     public void deleteSupplierById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<SupplierModel> byId = supplierRepository.findById(Long.valueOf(id));
+        Optional<SupplierModel> byId = supplierRepository.findById(id);
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->supplierRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteSupplier/{name_supplier}")
+    @DeleteMapping("/deleteSupplierByName/{name_supplier}")
     public void deleteProductByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
-        SupplierModel nameToDelete = supplierRepository.findByName(name_supplier);
-        if(!name_supplier.equals(supplierRepository.findByName(name_supplier))) throw new ThingDoesNotExistException();
-        supplierRepository.delete(nameToDelete);
+        Optional<SupplierModel> nameToDelete = Optional.ofNullable(supplierRepository.findByNameSupplier(name_supplier));
+        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        nameToDelete.ifPresent(p->supplierRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllSuppliers")

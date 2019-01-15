@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IngredientRepository extends JpaRepository<IngredientModel, Long> {
-    IngredientModel findByName(String name_ingredient);
+public interface IngredientRepository extends JpaRepository<IngredientModel, Integer> {
+    IngredientModel findByNameIngredient(String name_ingredient);
 }

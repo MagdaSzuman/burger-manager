@@ -34,12 +34,12 @@ public class IngredientController {
 
     @GetMapping("/findIngredientById")
     public Optional<IngredientModel> findIngredientById(@RequestParam(value = "id") Integer id) {
-        return ingredientRepository.findById(Long.valueOf(id));
+        return ingredientRepository.findById(id);
     }
 
     @GetMapping("/findIngredientByName")
     public IngredientModel findIngredientByName(@RequestParam(value = "name_ingredient") String name_ingredient) {
-        return ingredientRepository.findByName(name_ingredient);
+        return ingredientRepository.findByNameIngredient(name_ingredient);
     }
 
     @PostMapping("/addNewIngredient")
@@ -48,18 +48,18 @@ public class IngredientController {
         return save.getId();
     }
 
-    @DeleteMapping("/deleteIngredient/{id}")
+    @DeleteMapping("/deleteIngredientById/{id}")
     public void deleteIngredientById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<IngredientModel> byId = ingredientRepository.findById(Long.valueOf(id));
+        Optional<IngredientModel> byId = ingredientRepository.findById(id);
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->ingredientRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteIngredient/{name_ingredient}")
+    @DeleteMapping("/deleteIngredientByName/{name_ingredient}")
     public void deleteIngredientByName(@PathVariable("name_ingredient") String name_ingredient) throws ThingDoesNotExistException {
-        IngredientModel nameToDelete = ingredientRepository.findByName(name_ingredient);
-        if(!name_ingredient.equals(ingredientRepository.findByName(name_ingredient))) throw new ThingDoesNotExistException();
-        ingredientRepository.delete(nameToDelete);
+        Optional<IngredientModel> nameToDelete = Optional.ofNullable(ingredientRepository.findByNameIngredient(name_ingredient));
+        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        nameToDelete.ifPresent(p->ingredientRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllIngredients")

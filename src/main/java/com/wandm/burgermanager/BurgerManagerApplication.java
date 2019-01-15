@@ -35,12 +35,12 @@ public class BurgerManagerApplication {
     @Bean
     public CommandLineRunner test(){
         return (args -> {
-            SupplierModel supplierModel = new SupplierModel("Bekon","Szczecin");
+            SupplierModel supplierModel = new SupplierModel("Pieczywo","Szczecin");
             List<SupplierModel> id_ingredient = new ArrayList<>();
             id_ingredient.add(supplierModel);
-            supplierRepository.save(supplierModel);
+            SupplierModel save1 = supplierRepository.save(supplierModel);
 
-            IngredientModel ingredientModel = new IngredientModel("roll", supplierModel, 15, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC), 1);
+            IngredientModel ingredientModel = new IngredientModel("roll", save1, 15, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC), 1);
             ingredientRepository.save(ingredientModel);
 
             ProductModel productModel = new ProductModel("Classic");

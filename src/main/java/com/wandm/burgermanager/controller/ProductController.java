@@ -29,12 +29,12 @@ public class ProductController {
 
     @GetMapping("/findProductById")
     public Optional<ProductModel> findProductById(@RequestParam(value = "id") Integer id) {
-        return productRepository.findById(Long.valueOf(id));
+        return productRepository.findById(id);
     }
 
     @GetMapping("/findProductByName")
     public ProductModel findProductByName(@RequestParam(value = "name_burger") String name_burger) {
-        return productRepository.findByName(name_burger);
+        return productRepository.findByNameBurger(name_burger);
     }
 
     @PostMapping("/addNewProduct")
@@ -43,18 +43,18 @@ public class ProductController {
         return save.getId();
     }
 
-    @DeleteMapping("/deleteProduct/{id}")
-    public void deleteProductById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<ProductModel> byId = productRepository.findById(Long.valueOf(id));
+    @DeleteMapping("/deleteProductById/{id}")
+    public void deleteProductById(@PathVariable(value = "id") Integer id) throws ThingDoesNotExistException {
+        Optional<ProductModel> byId = productRepository.findById(id);
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->productRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteProduct/{name_burger}")
-    public void deleteProductByName(@PathVariable("name_burger") String name_burger) throws ThingDoesNotExistException {
-        ProductModel nameToDelete = productRepository.findByName(name_burger);
-        if(!name_burger.equals(productRepository.findByName(name_burger))) throw new ThingDoesNotExistException();
-        productRepository.delete(nameToDelete);
+    @DeleteMapping("/deleteProductByName/{nameBurger}")
+    public void deleteProductByName(@PathVariable(value = "nameBurger") String name_burger) throws ThingDoesNotExistException {
+        Optional<ProductModel> nameToDelete = Optional.ofNullable(productRepository.findByNameBurger(name_burger));
+        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        nameToDelete.ifPresent(p->productRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllProducts")
