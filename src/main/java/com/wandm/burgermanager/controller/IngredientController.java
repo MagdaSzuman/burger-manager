@@ -67,4 +67,5 @@ public class IngredientController {
         ingredientRepository.deleteAll();
     }
 
+
 }
