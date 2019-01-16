@@ -1,5 +1,7 @@
 package com.wandm.burgermanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,24 +10,30 @@ public class IngredientModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column (name= "name_ingredient")
+    @Column(name = "name_ingredient")
     private String nameIngredient;
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
+    @JsonIgnore
     private SupplierModel id_supplier;
     private Integer stock_ingredient;
     private long best_of_ingredient;
     private Integer portion_of_ingredient;
+    @ManyToOne
+    @JoinColumn(name = "listOfIngredients")
+    private Integer idType;
 
-    public IngredientModel() {
-    }
 
-    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient) {
+    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient, Integer idType) {
         this.nameIngredient = nameIngredient;
         this.id_supplier = id_supplier;
         this.stock_ingredient = stock_ingredient;
         this.best_of_ingredient = best_of_ingredient;
         this.portion_of_ingredient = portion_of_ingredient;
+        this.idType = idType;
+    }
+
+    public IngredientModel(String roll, SupplierModel supplierModel, int i, long toEpochSecond, int i1) {
     }
 
     public Integer getId() {
@@ -76,6 +84,14 @@ public class IngredientModel {
         this.portion_of_ingredient = portion_of_ingredient;
     }
 
+    public Integer getIdType() {
+        return idType;
+    }
+
+    public void setIdType(Integer idType) {
+        this.idType = idType;
+    }
+
     @Override
     public String toString() {
         return "IngredientModel{" +
@@ -85,6 +101,7 @@ public class IngredientModel {
                 ", stock_ingredient=" + stock_ingredient +
                 ", best_of_ingredient=" + best_of_ingredient +
                 ", portion_of_ingredient=" + portion_of_ingredient +
+                ", idType=" + idType +
                 '}';
     }
 }

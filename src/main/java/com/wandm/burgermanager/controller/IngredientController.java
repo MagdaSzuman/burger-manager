@@ -3,6 +3,7 @@ package com.wandm.burgermanager.controller;
 
 import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
 import com.wandm.burgermanager.model.IngredientModel;
+import com.wandm.burgermanager.model.ProductModel;
 import com.wandm.burgermanager.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,15 +52,17 @@ public class IngredientController {
     @DeleteMapping("/deleteIngredient/{id}")
     public void deleteIngredientById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
         Optional<IngredientModel> byId = ingredientRepository.findById(Integer.valueOf(id));
-        if(!byId.isPresent()) throw new ThingDoesNotExistException();
-        byId.ifPresent(p->ingredientRepository.delete(p));
+        if (!byId.isPresent()) throw new ThingDoesNotExistException();
+        byId.ifPresent(p -> ingredientRepository.delete(p));
     }
 
     @DeleteMapping("/deleteIngredient/{nameIngredient}")
     public void deleteIngredientByName(@PathVariable("nameIngredient") String nameIngredient) throws ThingDoesNotExistException {
-        IngredientModel nameToDelete = ingredientRepository.findByNameIngredient(nameIngredient);
-        if(!nameIngredient.equals(ingredientRepository.findByNameIngredient(nameIngredient))) throw new ThingDoesNotExistException();
-        ingredientRepository.delete(nameToDelete);
+        Optional<IngredientModel> nameToDelete = Optional.ofNullable(ingredientRepository.findByNameIngredient(nameIngredient));
+
+        if (!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        //nameToDelete.ifPresent(p -> IngredientRepository.delete(p));
+
     }
 
     @DeleteMapping("/deleteAllIngredients")

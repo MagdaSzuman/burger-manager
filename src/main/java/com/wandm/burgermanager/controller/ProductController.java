@@ -53,17 +53,19 @@ public class ProductController {
         byId.ifPresent(p->productRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteProductByName/{name_burger}")
-    public void deleteProductByName(@PathVariable ("name_burger") String nameBurger) throws ThingDoesNotExistException {
-        ProductModel nameToDelete = productRepository.findByNameBurger(nameBurger);
-        if(!nameBurger.equals(productRepository.findByNameBurger(nameBurger))) throw new ThingDoesNotExistException();
-        productRepository.delete(nameToDelete);
+    @DeleteMapping("/deleteProductByName/{nameBurger}")
+    public void deleteProductByName(@PathVariable(value = "nameBurger") String nameBurger) throws ThingDoesNotExistException {
+        Optional<ProductModel> nameToDelete = Optional.ofNullable(productRepository.findByNameBurger(nameBurger));
+        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        nameToDelete.ifPresent(p->productRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllProducts")
     public void deleteAllProducts() {
         productRepository.deleteAll();
     }
+
+
 }
 
 

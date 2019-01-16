@@ -36,15 +36,15 @@ public class BurgerRecipes {
             switch (option) {
                 case 1:
                     String dataFromUser = sc.nextLine();
-                    ingredientService.classic(dataFromUser);
+                 //  ingredientService.classic(dataFromUser);
                     break;
                 case 2:
                     String dataFromUser2 = sc.nextLine();
-                    ingredientService.bbq(dataFromUser2);
+                  //  ingredientService.bbq(dataFromUser2);
                     break;
                 case 3:
                     String dataFromUser3 = sc.nextLine();
-                    ingredientService.cheesee(dataFromUser3);
+                   // ingredientService.cheesee(dataFromUser3);
                     break;
                 case 4:
                     System.exit(0);

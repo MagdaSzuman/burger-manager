@@ -1,6 +1,8 @@
 package com.wandm.burgermanager.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ProductModel {
@@ -8,14 +10,18 @@ public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column (name= "name_burger")
+    @Column(name = "name_burger")
     private String nameBurger;
 
-    public ProductModel() {
+    @OneToMany (mappedBy = "idType", cascade = CascadeType.ALL)
+    public List<Integer> listOfIngredients = new ArrayList<>();
+
+    public ProductModel(String classic) {
     }
 
-    public ProductModel(String nameBurger) {
+    public ProductModel(String nameBurger, List<Integer> listOfIngredients) {
         this.nameBurger = nameBurger;
+        this.listOfIngredients = listOfIngredients;
     }
 
     public Integer getId() {
@@ -34,11 +40,14 @@ public class ProductModel {
         this.nameBurger = nameBurger;
     }
 
+
+
     @Override
     public String toString() {
         return "ProductModel{" +
                 "id=" + id +
                 ", nameBurger='" + nameBurger + '\'' +
+                ", listOfIngredients=" + listOfIngredients +
                 '}';
     }
 }
