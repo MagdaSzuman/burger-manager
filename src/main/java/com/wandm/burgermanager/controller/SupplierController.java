@@ -56,14 +56,14 @@ public class SupplierController {
     }
 
     @DeleteMapping("/deleteSupplierByName/{name_supplier}")
-    public void deleteProductByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
+    public void deleteSupplierByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
         Optional<SupplierModel> nameToDelete = Optional.ofNullable(supplierRepository.findByNameSupplier(name_supplier));
         if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
         nameToDelete.ifPresent(p->supplierRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllSuppliers")
-    public void deleteAllProducts() {
+    public void deleteAllSuppliers() {
         supplierRepository.deleteAll();
     }
 }

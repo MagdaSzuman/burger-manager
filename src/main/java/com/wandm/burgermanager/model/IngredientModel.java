@@ -19,6 +19,7 @@ public class IngredientModel {
     private Integer stock_ingredient;
     private long best_of_ingredient;
     private Integer portion_of_ingredient;
+    private Integer idType;
 
     public IngredientModel() {
     }
@@ -29,6 +30,15 @@ public class IngredientModel {
         this.stock_ingredient = stock_ingredient;
         this.best_of_ingredient = best_of_ingredient;
         this.portion_of_ingredient = portion_of_ingredient;
+    }
+
+    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient, Integer idType) {
+        this.nameIngredient = nameIngredient;
+        this.id_supplier = id_supplier;
+        this.stock_ingredient = stock_ingredient;
+        this.best_of_ingredient = best_of_ingredient;
+        this.portion_of_ingredient = portion_of_ingredient;
+        this.idType = idType;
     }
 
     public Integer getId() {
@@ -79,6 +89,14 @@ public class IngredientModel {
         this.portion_of_ingredient = portion_of_ingredient;
     }
 
+    public Integer getIdType() {
+        return idType;
+    }
+
+    public void setIdType(Integer idType) {
+        this.idType = idType;
+    }
+
     @Override
     public String toString() {
         return "IngredientModel{" +
@@ -88,6 +106,7 @@ public class IngredientModel {
                 ", stock_ingredient=" + stock_ingredient +
                 ", best_of_ingredient=" + best_of_ingredient +
                 ", portion_of_ingredient=" + portion_of_ingredient +
+                ", idType=" + idType +
                 '}';
     }
 }
