@@ -1,4 +1,4 @@
-package com.wandm.burgermanager.serivce;
+package com.wandm.burgermanager.service;
 
 import com.wandm.burgermanager.model.IngredientModel;
 

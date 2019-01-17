@@ -8,7 +8,7 @@ import com.wandm.burgermanager.repository.IngredientRepository;
 import com.wandm.burgermanager.repository.ProductRepository;
 import com.wandm.burgermanager.repository.SupplierRepository;
 import com.wandm.burgermanager.repository.TypeRepository;
-import io.swagger.models.auth.In;
+import com.wandm.burgermanager.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +27,9 @@ public class BurgerManagerApplication {
     }
 
     @Autowired
+    ProductServiceImpl productService;
+
+    @Autowired
     ProductRepository productRepository;
 
     @Autowired
@@ -40,30 +43,26 @@ public class BurgerManagerApplication {
 
     @Bean
     public CommandLineRunner test() {
+
+
         return (args -> {
-
-
-
             SupplierModel supplierModel = new SupplierModel("Pieczywo", "Szczecin");
             List<SupplierModel> id_ingredient = new ArrayList<>();
             id_ingredient.add(supplierModel);
             SupplierModel save1 = supplierRepository.save(supplierModel);
 
-            IngredientModel ingredientModel = new IngredientModel("roll", save1, 15, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC), 1);
-            ingredientRepository.save(ingredientModel);
 
             ProductModel productModel = new ProductModel("Classic");
-            List<Integer> listOfIngredients = new ArrayList<>();
-            productModel.listOfIngredients.add(1);
-            //productModel.listOfIngredients.set(id_ingredient.get(1)).equals("roll");
-
+            productModel.getListOfTypes().add(new TypeModel("Bulka"));
 
             ProductModel save = productRepository.save(productModel);
 
+            IngredientModel ingredientModel = new IngredientModel("roll", save1, 15, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC), 1, 1);
+            ingredientRepository.save(ingredientModel);
 
+            productService.selectBurger(1);
 
         });
     }
-
 
 }

@@ -10,18 +10,22 @@ public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name_burger")
+    @Column(name = "nameBurger")
     private String nameBurger;
 
-    @OneToMany (mappedBy = "idType", cascade = CascadeType.ALL)
-    public List<Integer> listOfIngredients = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<TypeModel> listOfTypes = new ArrayList<>();
 
-    public ProductModel(String classic) {
+    public ProductModel() {
     }
 
-    public ProductModel(String nameBurger, List<Integer> listOfIngredients) {
+    public ProductModel(String nameBurger) {
         this.nameBurger = nameBurger;
-        this.listOfIngredients = listOfIngredients;
+    }
+
+    public ProductModel(String nameBurger, List<TypeModel> listOfTypes) {
+        this.nameBurger = nameBurger;
+        this.listOfTypes = listOfTypes;
     }
 
     public Integer getId() {
@@ -41,13 +45,20 @@ public class ProductModel {
     }
 
 
+    public List<TypeModel> getListOfTypes() {
+        return listOfTypes;
+    }
+
+    public void setListOfTypes(List<TypeModel> listOfTypes) {
+        this.listOfTypes = listOfTypes;
+    }
 
     @Override
     public String toString() {
         return "ProductModel{" +
                 "id=" + id +
                 ", nameBurger='" + nameBurger + '\'' +
-                ", listOfIngredients=" + listOfIngredients +
+                ", listOfTypes=" + listOfTypes +
                 '}';
     }
 }

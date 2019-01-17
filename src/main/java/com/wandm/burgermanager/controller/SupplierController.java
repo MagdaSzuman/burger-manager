@@ -1,6 +1,7 @@
 package com.wandm.burgermanager.controller;
 
 
+
 import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
 import com.wandm.burgermanager.model.SupplierModel;
 import com.wandm.burgermanager.repository.SupplierRepository;
@@ -35,12 +36,12 @@ public class SupplierController {
 
     @GetMapping("/findSupplierById")
     public Optional<SupplierModel> findSupplierById(@RequestParam(value = "id") Integer id) {
-        return supplierRepository.findById(Integer.valueOf(id));
+        return supplierRepository.findById(id);
     }
 
     @GetMapping("/findSupplierByName")
-    public SupplierModel findSupplierByName(@RequestParam(value = "nameSupplier") String nameSupplier) {
-        return supplierRepository.findByNameSupplier(nameSupplier);
+    public SupplierModel findSupplierByName(@RequestParam(value = "name_supplier") String name_supplier) {
+        return supplierRepository.findByNameSupplier(name_supplier);
     }
 
     @PostMapping("/addNewSupplier")
@@ -49,22 +50,22 @@ public class SupplierController {
         return save.getId_supplier();
     }
 
-    @DeleteMapping("/deleteSupplier/{id}")
+    @DeleteMapping("/deleteSupplierById/{id}")
     public void deleteSupplierById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
-        Optional<SupplierModel> byId = supplierRepository.findById(Integer.valueOf(id));
+        Optional<SupplierModel> byId = supplierRepository.findById(id);
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->supplierRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteSupplier/{nameSupplier}")
-    public void deleteProductByName(@PathVariable("nameSupplier") String nameSupplier) throws ThingDoesNotExistException {
-        SupplierModel nameToDelete = supplierRepository.findByNameSupplier(nameSupplier);
-        if(!nameSupplier.equals(supplierRepository.findByNameSupplier(nameSupplier))) throw new ThingDoesNotExistException();
-        supplierRepository.delete(nameToDelete);
+    @DeleteMapping("/deleteSupplierByName/{name_supplier}")
+    public void deleteSupplierByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
+        Optional<SupplierModel> nameToDelete = Optional.ofNullable(supplierRepository.findByNameSupplier(name_supplier));
+        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        nameToDelete.ifPresent(p->supplierRepository.delete(p));
     }
 
     @DeleteMapping("/deleteAllSuppliers")
-    public void deleteAllProducts() {
+    public void deleteAllSuppliers() {
         supplierRepository.deleteAll();
     }
 }

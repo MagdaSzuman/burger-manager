@@ -5,11 +5,10 @@ package com.wandm.burgermanager.controller;
 import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
 import com.wandm.burgermanager.model.ProductModel;
 import com.wandm.burgermanager.repository.ProductRepository;
-import com.wandm.burgermanager.serivce.ProductService;
+import com.wandm.burgermanager.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 
