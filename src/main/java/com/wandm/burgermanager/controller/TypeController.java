@@ -31,30 +31,30 @@ public class TypeController {
     }
 
     @GetMapping("/findTypeByName")
-    public TypeModel findTypeByName(@RequestParam(value = "name_supplier") String name_type) {
+    public TypeModel findTypeByName(@RequestParam(value = "name_type") String name_type) {
         return typeRepository.findByName(name_type);
     }
 
-    @PostMapping("/addNewType")
+    @PostMapping("/api/addNewType")
     public Integer createNewType (@RequestBody TypeModel typeModel) {
         return typeRepository.save(typeModel).getId();
     }
 
-    @DeleteMapping("/deleteTypeById/{id}")
+    @DeleteMapping("/api/deleteTypeById/{id}")
     public void deleteTypeById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
         Optional<TypeModel> byId = typeRepository.findById(id);
         if(!byId.isPresent()) throw new ThingDoesNotExistException();
         byId.ifPresent(p->typeRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteTypeByName/{name_type}")
+    @DeleteMapping("/api/deleteTypeByName/{name_type}")
     public void deleteTypeByName(@PathVariable("name_type") String name_type) throws ThingDoesNotExistException {
         Optional<TypeModel> nameToDelete = Optional.ofNullable(typeRepository.findByName(name_type));
         if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
         nameToDelete.ifPresent(p->typeRepository.delete(p));
     }
 
-    @DeleteMapping("/deleteAllType")
+    @DeleteMapping("/api/deleteAllTypes")
     public void deleteAllTypes() {
         typeRepository.deleteAll();
     }

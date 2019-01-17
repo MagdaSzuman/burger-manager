@@ -13,8 +13,8 @@ public class ProductModel {
     @Column(name = "nameBurger")
     private String nameBurger;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<TypeModel> listofTypes = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<TypeModel> listOfTypes = new ArrayList<>();
 
     public ProductModel() {
     }
@@ -25,7 +25,7 @@ public class ProductModel {
 
     public ProductModel(String nameBurger, List<TypeModel> listofTypes) {
         this.nameBurger = nameBurger;
-        this.listofTypes = listofTypes;
+        this.listOfTypes = listofTypes;
     }
 
     public Integer getId() {
@@ -45,12 +45,12 @@ public class ProductModel {
     }
 
 
-    public List<TypeModel> getListofTypes() {
-        return listofTypes;
+    public List<TypeModel> getListOfTypes() {
+        return listOfTypes;
     }
 
-    public void setListofTypes(List<TypeModel> listofTypes) {
-        this.listofTypes = listofTypes;
+    public void setListOfTypes(List<TypeModel> listOfTypes) {
+        this.listOfTypes = listOfTypes;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ProductModel {
         return "ProductModel{" +
                 "id=" + id +
                 ", nameBurger='" + nameBurger + '\'' +
-                ", listofTypes=" + listofTypes +
+                ", listofTypes=" + listOfTypes +
                 '}';
     }
 }

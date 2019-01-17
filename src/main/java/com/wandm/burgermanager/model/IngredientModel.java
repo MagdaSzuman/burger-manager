@@ -16,7 +16,7 @@ public class IngredientModel {
     @JoinColumn(name = "id_ingredient")
     @JsonIgnore
     private SupplierModel id_supplier;
-    private Integer stock_ingredient;
+    private Integer stockIngredient;
     private long best_of_ingredient;
     private Integer portion_of_ingredient;
     private Integer idType;
@@ -24,18 +24,18 @@ public class IngredientModel {
     public IngredientModel() {
     }
 
-    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient) {
+    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stockIngredient, long best_of_ingredient, Integer portion_of_ingredient) {
         this.nameIngredient = nameIngredient;
         this.id_supplier = id_supplier;
-        this.stock_ingredient = stock_ingredient;
+        this.stockIngredient = stockIngredient;
         this.best_of_ingredient = best_of_ingredient;
         this.portion_of_ingredient = portion_of_ingredient;
     }
 
-    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stock_ingredient, long best_of_ingredient, Integer portion_of_ingredient, Integer idType) {
+    public IngredientModel(String nameIngredient, SupplierModel id_supplier, Integer stockIngredient, long best_of_ingredient, Integer portion_of_ingredient, Integer idType) {
         this.nameIngredient = nameIngredient;
         this.id_supplier = id_supplier;
-        this.stock_ingredient = stock_ingredient;
+        this.stockIngredient = stockIngredient;
         this.best_of_ingredient = best_of_ingredient;
         this.portion_of_ingredient = portion_of_ingredient;
         this.idType = idType;
@@ -65,12 +65,12 @@ public class IngredientModel {
         this.id_supplier = id_supplier;
     }
 
-    public Integer getStock_ingredient() {
-        return stock_ingredient;
+    public Integer getStockIngredient() {
+        return stockIngredient;
     }
 
-    public void setStock_ingredient(Integer stock_ingredient) {
-        this.stock_ingredient = stock_ingredient;
+    public void setStockIngredient(Integer stockIngredient) {
+        this.stockIngredient = stockIngredient;
     }
 
     public long getBest_of_ingredient() {
@@ -103,7 +103,7 @@ public class IngredientModel {
                 "id=" + id +
                 ", nameIngredient='" + nameIngredient + '\'' +
                 ", id_supplier=" + id_supplier +
-                ", stock_ingredient=" + stock_ingredient +
+                ", stockIngredient=" + stockIngredient +
                 ", best_of_ingredient=" + best_of_ingredient +
                 ", portion_of_ingredient=" + portion_of_ingredient +
                 ", idType=" + idType +
