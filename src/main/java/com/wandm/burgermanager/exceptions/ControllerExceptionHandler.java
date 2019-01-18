@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice(basePackages = "com.wandm.burgermanager.controller")
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {ThingDoesNotExistException.class})
+    @ExceptionHandler(value = {BurgerDoesNotExistException.class})
     public ResponseEntity<Object> handlerThingDoesNotExistException(Exception ex, WebRequest webRequest) {
         String bodyError = "You've got burgerError ;P";
         return handleExceptionInternal(ex, bodyError, new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);

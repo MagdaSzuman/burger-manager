@@ -1,10 +1,10 @@
 package com.wandm.burgermanager.service;
 
-import com.wandm.burgermanager.model.IngredientModel;
+import com.wandm.burgermanager.exceptions.IngredientDoesNotExistException;
+import com.wandm.burgermanager.model.TypeModel;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ProductService {
-    void addProduct(Integer id_burger, String nameBurger, Set<IngredientModel> ingredients, Integer ingredient_quantity);
-
+    List<TypeModel> selectBurger(Integer idBurger)throws IngredientDoesNotExistException;
 }

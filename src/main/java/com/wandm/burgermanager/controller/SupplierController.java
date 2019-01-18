@@ -1,6 +1,6 @@
 package com.wandm.burgermanager.controller;
 
-import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
+import com.wandm.burgermanager.exceptions.BurgerDoesNotExistException;
 import com.wandm.burgermanager.model.SupplierModel;
 import com.wandm.burgermanager.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,16 +48,16 @@ public class SupplierController {
     }
 
     @DeleteMapping("/api/deleteSupplierById/{id}")
-    public void deleteSupplierById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
+    public void deleteSupplierById(@PathVariable("id") Integer id) throws BurgerDoesNotExistException {
         Optional<SupplierModel> byId = supplierRepository.findById(id);
-        if(!byId.isPresent()) throw new ThingDoesNotExistException();
+        if(!byId.isPresent()) throw new BurgerDoesNotExistException();
         byId.ifPresent(p->supplierRepository.delete(p));
     }
 
     @DeleteMapping("/api/deleteSupplierByName/{name_supplier}")
-    public void deleteSupplierByName(@PathVariable("name_supplier") String name_supplier) throws ThingDoesNotExistException {
+    public void deleteSupplierByName(@PathVariable("name_supplier") String name_supplier) throws BurgerDoesNotExistException {
         Optional<SupplierModel> nameToDelete = Optional.ofNullable(supplierRepository.findByNameSupplier(name_supplier));
-        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        if(!nameToDelete.isPresent()) throw new BurgerDoesNotExistException();
         nameToDelete.ifPresent(p->supplierRepository.delete(p));
     }
 

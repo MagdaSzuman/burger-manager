@@ -1,6 +1,6 @@
 package com.wandm.burgermanager.controller;
 
-import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
+import com.wandm.burgermanager.exceptions.BurgerDoesNotExistException;
 import com.wandm.burgermanager.model.ProductModel;
 import com.wandm.burgermanager.repository.ProductRepository;
 import com.wandm.burgermanager.service.ProductService;
@@ -44,16 +44,16 @@ public class ProductController {
     }
 
     @DeleteMapping("/api/deleteProductById/{id}")
-    public void deleteProductById(@PathVariable(value = "id") Integer id) throws ThingDoesNotExistException {
+    public void deleteProductById(@PathVariable(value = "id") Integer id) throws BurgerDoesNotExistException {
         Optional<ProductModel> byId = productRepository.findById(id);
-        if(!byId.isPresent()) throw new ThingDoesNotExistException();
+        if(!byId.isPresent()) throw new BurgerDoesNotExistException();
         byId.ifPresent(p->productRepository.delete(p));
     }
 
     @DeleteMapping("/api/deleteProductByName/{nameBurger}")
-    public void deleteProductByName(@PathVariable(value = "nameBurger") String name_burger) throws ThingDoesNotExistException {
+    public void deleteProductByName(@PathVariable(value = "nameBurger") String name_burger) throws BurgerDoesNotExistException {
         Optional<ProductModel> nameToDelete = Optional.ofNullable(productRepository.findByNameBurger(name_burger));
-        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        if(!nameToDelete.isPresent()) throw new BurgerDoesNotExistException();
         nameToDelete.ifPresent(p->productRepository.delete(p));
     }
 

@@ -1,7 +1,7 @@
 package com.wandm.burgermanager.controller;
 
 
-import com.wandm.burgermanager.exceptions.ThingDoesNotExistException;
+import com.wandm.burgermanager.exceptions.BurgerDoesNotExistException;
 import com.wandm.burgermanager.model.TypeModel;
 import com.wandm.burgermanager.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +41,16 @@ public class TypeController {
     }
 
     @DeleteMapping("/api/deleteTypeById/{id}")
-    public void deleteTypeById(@PathVariable("id") Integer id) throws ThingDoesNotExistException {
+    public void deleteTypeById(@PathVariable("id") Integer id) throws BurgerDoesNotExistException {
         Optional<TypeModel> byId = typeRepository.findById(id);
-        if(!byId.isPresent()) throw new ThingDoesNotExistException();
+        if(!byId.isPresent()) throw new BurgerDoesNotExistException();
         byId.ifPresent(p->typeRepository.delete(p));
     }
 
     @DeleteMapping("/api/deleteTypeByName/{name_type}")
-    public void deleteTypeByName(@PathVariable("name_type") String name_type) throws ThingDoesNotExistException {
+    public void deleteTypeByName(@PathVariable("name_type") String name_type) throws BurgerDoesNotExistException {
         Optional<TypeModel> nameToDelete = Optional.ofNullable(typeRepository.findByName(name_type));
-        if(!nameToDelete.isPresent()) throw new ThingDoesNotExistException();
+        if(!nameToDelete.isPresent()) throw new BurgerDoesNotExistException();
         nameToDelete.ifPresent(p->typeRepository.delete(p));
     }
 

@@ -63,5 +63,6 @@ public class BurgerManagerApplication {
             productServiceImpl.selectBurger(1);
 
         });
+
     }
 }

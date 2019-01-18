@@ -23,9 +23,9 @@ public class ProductModel {
         this.nameBurger = nameBurger;
     }
 
-    public ProductModel(String nameBurger, List<TypeModel> listofTypes) {
+    public ProductModel(String nameBurger, List<TypeModel> listOfTypes) {
         this.nameBurger = nameBurger;
-        this.listOfTypes = listofTypes;
+        this.listOfTypes = listOfTypes;
     }
 
     public Integer getId() {
@@ -58,7 +58,7 @@ public class ProductModel {
         return "ProductModel{" +
                 "id=" + id +
                 ", nameBurger='" + nameBurger + '\'' +
-                ", listofTypes=" + listOfTypes +
+                ", listOfTypes=" + listOfTypes +
                 '}';
     }
 }

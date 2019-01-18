@@ -1,6 +1,6 @@
 package com.wandm.burgermanager.service;
 
-import com.wandm.burgermanager.exceptions.IngredientDoesNotExist;
+import com.wandm.burgermanager.exceptions.IngredientDoesNotExistException;
 import com.wandm.burgermanager.model.IngredientModel;
 import com.wandm.burgermanager.model.ProductModel;
 import com.wandm.burgermanager.model.TypeModel;
@@ -9,12 +9,9 @@ import com.wandm.burgermanager.repository.ProductRepository;
 import com.wandm.burgermanager.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,11 +26,8 @@ public class ProductServiceImpl implements ProductService {
     public TypeRepository typeRepository;
     public IngredientRepository ingredientRepository;
 
-    @Override
-    public void addProduct(Integer id_burger, String nameBurger, Set<IngredientModel> ingredients, Integer ingredient_quantity) {
-    }
 
-    public  List<TypeModel> selectBurger(Integer idBurger) throws IngredientDoesNotExist {
+    public  List<TypeModel> selectBurger(Integer idBurger) throws IngredientDoesNotExistException {
 
         Optional<ProductModel> byId = productRepository.findById(idBurger);
         List<TypeModel> listOfTypes = byId.get().getListOfTypes();
@@ -50,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
                 System.out.println(stock_ingredient);
 
             } else {
-                throw new IngredientDoesNotExist("Nie ma tego produktu");
+                throw new IngredientDoesNotExistException("Nie ma tego produktu");
             }
         }
         return Collections.emptyList();
